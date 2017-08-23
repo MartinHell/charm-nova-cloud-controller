@@ -274,7 +274,6 @@ class NovaIPv6Context(context.BindHostContext):
         ctxt['use_ipv6'] = config('prefer-ipv6')
         return ctxt
 
-neutron/neutron.log
 class InstanceConsoleContext(context.OSContextGenerator):
     interfaces = []
 
