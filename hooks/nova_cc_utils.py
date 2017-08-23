@@ -216,6 +216,7 @@ NEUTRON_CONF_DIR = "/etc/neutron"
 
 NOVA_CONF = '%s/nova.conf' % NOVA_CONF_DIR
 NOVA_API_PASTE = '%s/api-paste.ini' % NOVA_CONF_DIR
+NOVA_LOGGER_CONF = '%s/logging.conf' % NOVA_CONF_DIR
 HAPROXY_CONF = '/etc/haproxy/haproxy.cfg'
 APACHE_CONF = '/etc/apache2/sites-available/openstack_https_frontend'
 APACHE_24_CONF = '/etc/apache2/sites-available/openstack_https_frontend.conf'
@@ -290,6 +291,10 @@ BASE_RESOURCE_MAP = OrderedDict([
     (APACHE_24_CONF, {
         'contexts': [nova_cc_context.ApacheSSLContext()],
         'services': ['apache2'],
+    }),
+    (NOVA_LOGGER_CONF, {
+        'contexts': [nova_cc_context.NovaCCLoggingContext()],
+        'services': resolve_services(),
     }),
 ])
 
