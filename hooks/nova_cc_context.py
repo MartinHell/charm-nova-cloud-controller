@@ -274,7 +274,7 @@ class NovaIPv6Context(context.BindHostContext):
         ctxt['use_ipv6'] = config('prefer-ipv6')
         return ctxt
 
-
+neutron/neutron.log
 class InstanceConsoleContext(context.OSContextGenerator):
     interfaces = []
 
@@ -401,4 +401,22 @@ class NovaAPISharedDBContext(context.SharedDBContext):
         if ctxt is not None:
             prefix = 'nova_api_{}'
             ctxt = {prefix.format(k): v for k, v in ctxt.items()}
+        return ctxt
+
+class NovaCCLoggingContext(context.OSContextGenerator):
+
+    def __call__(self):
+        ctxt = {}
+        debug = config('debug')
+        if debug:
+            ctxt['root_level'] = 'DEBUG'
+        log_level = config('log-level')
+        log_level_accepted_params = ['WARNING', 'INFO', 'DEBUG', 'ERROR']
+        if log_level in log_level_accepted_params:
+            ctxt['log_level'] = config('log-level')
+        else:
+            log("log-level must be one of the following states "
+                "(WARNING, INFO, DEBUG, ERROR) keeping the current state.")
+            ctxt['log_level'] = None
+
         return ctxt
