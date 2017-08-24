@@ -12,6 +12,11 @@ options:
     default: False
     description: |
       Setting this to True will allow supporting services to log to syslog.
+  json-logs:
+    type: boolean
+    default: False
+    description: |
+      Setting this to True will configure logformat to json.
   openstack-origin:
     default: distro
     type: string
@@ -315,7 +320,7 @@ options:
        Console keymap
   console-ssl-cert:
     type: string
-    default: 
+    default:
     description: |
       Used for encrypted console connections. This differs from the SSL
       certificate used for API endpoints and is used for console sessions only.
@@ -376,7 +381,7 @@ options:
       Used by the nrpe-external-master subordinate charm.
       A string that will be prepended to instance name to set the host name
       in nagios. So for instance the hostname would be something like:
-      
+
         juju-myservice-0
 
       If you're running multiple environments with the same services in them
@@ -395,7 +400,7 @@ options:
       nova-consoleauth service will be running, this allows users to always
       authenticate against the same instance and avoid authentications issues
       when the token used was stored in a different instance.
-      
+
       If memcached is being used to store the tokens, then it's recommended to
       change this configuration to False.
   action-managed-upgrade:
